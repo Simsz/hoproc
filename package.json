@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3332",
+    "deploy": "npm run build && npm run start",
     "lint": "next lint",
     "update-events": "node scripts/update-events.js",
     "validate-events": "node scripts/validate-events.js"
