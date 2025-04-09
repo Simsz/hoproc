@@ -1,7 +1,6 @@
 import { Event, EventVibe, VenueId } from '@/types';
 import { generateUniqueId } from './utils';
 import Anthropic from '@anthropic-ai/sdk';
-import fs from 'fs';
 import axios from 'axios';
 import sharp from 'sharp';
 
@@ -29,8 +28,7 @@ const anthropic = new Anthropic({
  */
 export async function normalizeWithLLM(
   rawEventData: string,
-  venue: string,
-  options: NormalizationOptions = {}
+  venue: string
 ): Promise<Partial<Event>> {
   try {
     console.log('Normalizing data with Claude...', { venue });

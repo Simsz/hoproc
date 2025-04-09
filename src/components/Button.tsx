@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 
 interface ButtonProps {
   children: React.ReactNode;

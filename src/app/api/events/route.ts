@@ -125,8 +125,6 @@ export async function GET(request: NextRequest) {
  * Filter out past events
  */
 function filterPastEvents(events: Event[]): Event[] {
-  const now = new Date();
-  
   // For debugging
   console.log(`Total events before filtering: ${events.length}`);
   

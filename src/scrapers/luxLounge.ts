@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { Event, EventVibe, VenueId } from '@/types';
 import { generateUniqueId } from '@/lib/utils';
-import { processEventImageWithLLM, extractDateFromText, summarizeText } from '@/lib/normalizeWithLLM';
+import { processEventImageWithLLM, summarizeText } from '@/lib/normalizeWithLLM';
 
 /**
  * Scrapes event data from Lux Lounge website
@@ -208,7 +208,11 @@ export async function scrapeLuxLounge(): Promise<Event[]> {
         let description = eventDetails.description || 'Special event at Lux Lounge';
         
         // Access performers from the raw data if available
-        const rawData = eventDetails as any; // Cast to any to access potential performers field
+        interface ExtendedEventData extends Partial<Event> {
+          performers?: string[];
+        }
+        
+        const rawData = eventDetails as ExtendedEventData;
         if (rawData.performers && Array.isArray(rawData.performers) && rawData.performers.length > 0) {
           description = `${description} Featuring: ${rawData.performers.join(', ')}`;
         }

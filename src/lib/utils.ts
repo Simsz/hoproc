@@ -1,5 +1,9 @@
+import { Event } from '@/types';
+
 /**
- * Generates a unique ID for events
+ * Generate a unique ID for events
+ * 
+ * @returns A random string ID
  */
 export function generateUniqueId(): string {
   return Math.random().toString(36).substring(2, 15) + 
@@ -7,29 +11,32 @@ export function generateUniqueId(): string {
 }
 
 /**
- * Groups events by day (based on date property)
+ * Format a date for display
  */
-export function groupEventsByDay(events: any[]): Record<string, any[]> {
-  return events.reduce((grouped, event) => {
-    const date = new Date(event.date);
-    const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD
-    
-    if (!grouped[dateStr]) {
-      grouped[dateStr] = [];
-    }
-    
-    grouped[dateStr].push(event);
-    return grouped;
-  }, {} as Record<string, any[]>);
+export function formatDate(date: Date): string {
+  return new Date(date).toLocaleDateString('en-US', { 
+    weekday: 'short',
+    month: 'short', 
+    day: 'numeric'
+  });
 }
 
 /**
- * Formats a date to a human-readable string
+ * Group events by day
  */
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  }).format(date);
+export function groupEventsByDay(events: Event[]): Record<string, Event[]> {
+  const groupedEvents: Record<string, Event[]> = {};
+  
+  events.forEach(event => {
+    const date = new Date(event.date);
+    const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD format
+    
+    if (!groupedEvents[dateKey]) {
+      groupedEvents[dateKey] = [];
+    }
+    
+    groupedEvents[dateKey].push(event);
+  });
+  
+  return groupedEvents;
 } 

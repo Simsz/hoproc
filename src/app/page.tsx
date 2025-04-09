@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { formatDate, groupEventsByDay } from '@/lib/utils';
-import { Event, EventVibe, VenueId } from '@/types';
+import { Event } from '@/types';
 // import Astronaut from '@/components/Astronaut'; // Commented out as requested
 import GridPattern from '@/components/GridPattern';
 import EventCard from '@/components/EventCard';
@@ -26,7 +26,6 @@ export default function Home() {
   const [events, setEvents] = useState<Event[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showSplash, setShowSplash] = useState(true);
-  const [likesData, setLikesData] = useState<LikesStore | null>(null);
   const [featuredEvent, setFeaturedEvent] = useState<Event | null>(null);
   const [showMobileHint, setShowMobileHint] = useState(false);
 
@@ -92,7 +91,6 @@ export default function Home() {
         }
         
         const data = await response.json();
-        setLikesData(data);
         
         // Find featured event
         if (events.length > 0 && data.likes) {
@@ -151,7 +149,7 @@ export default function Home() {
   };
   
   // Handle like event callback
-  const handleLikeEvent = (eventId: string) => {
+  const handleLikeEvent = () => {
     // Refresh likes data when an event is liked
     fetch('/api/likes')
       .then(response => {
@@ -161,8 +159,6 @@ export default function Home() {
         throw new Error('Failed to fetch likes');
       })
       .then(data => {
-        setLikesData(data);
-        
         if (events.length > 0 && data.likes) {
           updateFeaturedEvent(data.likes, events);
         }

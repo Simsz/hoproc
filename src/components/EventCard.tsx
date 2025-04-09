@@ -1,6 +1,6 @@
 import { Event, EventVibe, VenueId } from '@/types';
 import Button from './Button';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useLikes } from '@/hooks/useLikes';
 
 // Event card component with minimalist brutalist styling
@@ -203,7 +203,7 @@ export default function EventCard({ event, onLikeEvent }: { event: Event, onLike
               {/* Event vibes - show as geometric symbols - no animation */}
               {event.vibe && event.vibe.length > 0 && (
                 <div className="flex space-x-1 mr-3">
-                  {event.vibe.slice(0, 3).map((vibe, i) => (
+                  {event.vibe.slice(0, 3).map((vibe) => (
                     <span 
                       key={vibe} 
                       className="text-[#e01414] text-xs"
