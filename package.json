@@ -6,12 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-events": "node scripts/update-events.js",
+    "validate-events": "node scripts/validate-events.js"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.4"
+    "next": "15.2.4",
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2",
+    "@anthropic-ai/sdk": "^0.18.0",
+    "node-cron": "^3.0.3",
+    "dotenv": "^16.4.5",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -22,6 +31,9 @@
     "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.35",
+    "@types/node-cron": "^3.0.11"
   }
 }
